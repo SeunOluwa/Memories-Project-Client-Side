@@ -1,5 +1,6 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
 
+// eslint-disable-next-line
 export default (posts = [], action) => {
     switch (action.type) {
         case DELETE:
