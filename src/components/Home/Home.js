@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input'; 
 
-import { getPosts } from '../../actions/posts';
+import { getPosts, getPostsBySearch } from '../../actions/posts';
 import Pagination from '../Pagination';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
@@ -31,8 +31,9 @@ const Home = () => {
     }, [currentId, dispatch]);
 
     const searchPost = () => {
-        if (search.trim()) {
-            // dispatch -> fetch search post
+        if (search.trim() || tags) {
+            dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
+            history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
         } else {
             history.push('/');
         }
